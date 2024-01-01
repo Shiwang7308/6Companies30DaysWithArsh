@@ -1,0 +1,122 @@
+Question:
+Given an unsorted array Arr of size N of positive integers. One number 'A' from set {1, 2,....,N} is missing and one number 'B' occurs twice in array. Find these two numbers.
+
+Example 1:
+Input:
+N = 2
+Arr[] = {2, 2}
+Output: 2 1
+Explanation: Repeating number is 2 and 
+smallest positive missing number is 1.
+
+Example 2:
+Input:
+N = 3
+Arr[] = {1, 3, 3}
+Output: 3 2
+Explanation: Repeating number is 3 and
+smallest positive missing number is 2.
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function findTwoElement() which takes the array of integers arr and n as parameters and returns an array of integers of size 2 denoting the answer ( The first index contains B and second index contains A.)
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 ≤ N ≤ 105
+1 ≤ Arr[i] ≤ N
+*/
+
+Solution:
+vector<int> findTwoElement(int *arr, int n) {
+        // code here
+        vector<int> ans;
+        int i=0;
+        while(i<n){
+            if(arr[i]!=arr[arr[i]-1]){
+                swap(arr[i],arr[arr[i]-1]);
+            }
+            else{
+                i++;
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(arr[i]!=i+1){
+                ans.push_back(arr[i]);
+                ans.push_back(i+1);
+                break;
+            }
+        }
+        return ans;
+    }
+
+Intution:
+1. We will traverse the array and swap the elements with their correct position.
+2. After swapping we will check if the element is at its correct position or not.
+3. If not then we will push the element and its correct position in the vector and return it.
+
+Exampnation of the code with example:
+arr[] = {1,3,3}
+i=0
+arr[0]!=arr[arr[0]-1]
+arr[0]!=arr[1]
+1!=3
+swap(arr[0],arr[1])
+arr[] = {3,1,3}
+
+i=0
+arr[0]!=arr[arr[0]-1]
+arr[0]!=arr[2]
+3!=3
+i++
+
+i=1
+arr[1]!=arr[arr[1]-1]
+arr[1]!=arr[0]
+1!=3
+swap(arr[1],arr[0])
+arr[] = {1,3,3}
+
+i=1
+arr[1]!=arr[arr[1]-1]
+arr[1]!=arr[2]
+3!=3
+i++
+
+i=2
+arr[2]!=arr[arr[2]-1]
+arr[2]!=arr[2]
+3!=3
+i++
+
+i=3
+i<n
+break
+
+for(int i=0;i<n;i++){
+            if(arr[i]!=i+1){
+                ans.push_back(arr[i]);
+                ans.push_back(i+1);
+                break;
+            }
+        }
+
+arr[0]!=0+1
+arr[0]!=1
+1!=1
+i++
+
+arr[1]!=1+1
+arr[1]!=2
+3!=2
+ans.push_back(arr[1]);
+ans.push_back(2);
+break;
+
+ans = {3,2}
+return ans
+
+Time Complexity: O(N)
+Space Complexity: O(1)
+
