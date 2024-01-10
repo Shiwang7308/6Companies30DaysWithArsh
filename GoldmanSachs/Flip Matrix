@@ -1,0 +1,50 @@
+Question: https://leetcode.com/problems/random-flip-matrix/description/
+
+class Solution {
+    int i,j;
+    int m,n;
+public:
+    Solution(int m, int n) {
+        i = 0;
+        j = 0;
+        this -> m = m;
+        this -> n = n;
+    }
+    
+    vector<int> flip() {
+        vector<int> ans =  {i,j};
+        j = (j + 1);
+        if(j == n){
+            j = 0;
+            i += 1;
+            if(i == m){
+                i = 0;
+            }
+        }
+        return ans;
+    }
+    
+    void reset() {
+        
+    }
+};
+
+Explanation: 
+
+Intialise i = 0, j = 0.
+Now when flip is called move in the next column in the same row. However, if we reached out of the column, move to next row, and set column to 0. Similarly, if we reach out of row, then set row to 0.
+
+Since we have adjusted the iterators in flip function only no need to alter reset function.
+Reason? : If we reset the iterators to 0,0 we are defeating the purpose of rand() function from which we were generating indexes with equal probability. So after reset is called we will not alter the iterators so probability will remain eqally likeable.
+
+See the code for implementation
+
+Complexity=>
+
+Time complexity:
+Solution() -> O(1)
+flip() -> O(1)
+reset() -> O(1)
+
+Space complexity:
+O(m*n)
